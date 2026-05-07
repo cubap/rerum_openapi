@@ -6,8 +6,10 @@ Seam-first contract governance repository for RERUM and downstream consumers.
 
 This repository stores API contract assets and policy without coupling changes into implementation repositories until teams are ready.
 
-Primary pilot seam:
-- RERUM (rerum_server_nodejs) -> TinyThings (TinyNode)
+Current seam inventory: 11 active seam manifests.
+
+Human-facing seam map:
+- docs/human-guide/interaction-index.md
 
 Contract model:
 - OpenAPI is canonical for interface design and change policy.
@@ -27,7 +29,7 @@ No implementation repository changes are required to start. This repo is intenti
 
 ## First Steps
 
-1. Fill in the pilot seam manifest in seams/rerum-to-tinythings/manifest.yaml.
-2. Add canonical OpenAPI source or external source reference in seams/rerum-to-tinythings/openapi/.
-3. Validate manifests with the schema in schemas/seam-manifest.schema.json.
-4. Follow docs/human-guide/implementation-playbook.md for rollout steps.
+1. Choose a seam from docs/human-guide/interaction-index.md.
+2. Update that seam's manifest and baseline OpenAPI artifact under seams/<seam-id>/.
+3. Validate manifests with schemas/seam-manifest.schema.json by running npm run validate:manifests.
+4. Follow docs/human-guide/implementation-playbook.md for rollout and governance steps.

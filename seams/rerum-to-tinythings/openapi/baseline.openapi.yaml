@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: TinyNode to RERUM Pilot Contract
+  version: 0.1.0-alpha.1
+  description: >-
+    Baseline OpenAPI contract artifact for the seam between TinyNode and RERUM.
+externalDocs:
+  description: TinyNode routes source of truth
+  url: https://github.com/CenterForDigitalHumanities/TinyNode/tree/main/routes
+x-upstream-provider:
+  name: rerum_server_nodejs
+  baseUrl: https://store.rerum.io/v1
+servers:
+  - url: https://store.rerum.io/v1
+paths:
+  /health:
+    get:
+      summary: Service liveness check
+      operationId: getHealth
+      responses:
+        '200':
+          description: Service is live
+          content:
+            application/json:
+              schema:
+                $ref: '../../../schemas/openapi/tinynode-shared-components.openapi.yaml#/components/schemas/HealthResponse'
+  /ready:
+    get:
+      summary: Service readiness check
+      operationId: getReadiness
+      responses:
+        '200':
+          description: Service is ready to serve requests
+          content:
+            application/json:
+              schema:
+                $ref: '../../../schemas/openapi/tinynode-shared-components.openapi.yaml#/components/schemas/ReadinessResponse'
+  /openapi.json:
+    get:
+      summary: Machine-readable OpenAPI endpoint
+      operationId: getOpenApiDocument
+      responses:
+        '200':
+          description: OpenAPI specification document
+          content:
+            application/json:
+              schema:
+                $ref: '../../../schemas/openapi/tinynode-shared-components.openapi.yaml#/components/schemas/OpenApiDocumentResponse'

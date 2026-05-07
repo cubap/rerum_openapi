@@ -1,0 +1,32 @@
+openapi: 3.0.3
+info:
+  title: Gallery-of-Glosses to RERUM Contract
+  version: 0.1.0-alpha.1
+  description: Baseline contract for Gallery-of-Glosses calls into RERUM.
+servers:
+  - url: https://store.rerum.io/v1
+paths:
+  /gog/glossesInManuscript:
+    post:
+      summary: Find glosses in manuscript
+      operationId: glossesInManuscript
+      responses:
+        '200':
+          description: Glosses result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /gog/fragmentsInManuscript:
+    post:
+      summary: Find fragments in manuscript
+      operationId: fragmentsInManuscript
+      responses:
+        '200':
+          description: Fragments result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true

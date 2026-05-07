@@ -13,6 +13,7 @@
     "pact_broker_subjects",
     "verification_gates",
     "environments",
+    "environment_gate_mode",
     "versioning_policy",
     "owners",
     "deprecation_policy",
@@ -75,6 +76,16 @@
       "type": "array",
       "items": { "type": "string" },
       "minItems": 1
+    },
+    "environment_gate_mode": {
+      "type": "object",
+      "required": ["dev", "stage", "prod"],
+      "properties": {
+        "dev": { "type": "string", "enum": ["advisory", "blocking"] },
+        "stage": { "type": "string", "enum": ["advisory", "blocking"] },
+        "prod": { "type": "string", "enum": ["advisory", "blocking"] }
+      },
+      "additionalProperties": false
     },
     "versioning_policy": {
       "type": "object",

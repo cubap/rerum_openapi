@@ -1,0 +1,40 @@
+openapi: 3.0.3
+info:
+  title: TinyNode to RERUM Contract
+  version: 0.1.0-alpha.1
+  description: Baseline contract for TinyNode calls into RERUM.
+servers:
+  - url: https://store.rerum.io/v1
+paths:
+  /id/{id}:
+    get:
+      summary: Read object by id
+      operationId: getObjectById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Object payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /api/query:
+    post:
+      summary: Query objects
+      operationId: queryObjects
+      responses:
+        '200':
+          description: Query results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true

@@ -23,6 +23,10 @@ environments:
   - dev
   - stage
   - prod
+environment_gate_mode:
+  dev: advisory
+  stage: blocking
+  prod: blocking
 versioning_policy:
   channel_tags:
     - alpha

@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: TPEN-services to TinyNode Contract
+  version: 0.1.0-alpha.1
+  description: Baseline contract for TPEN-services calls into TinyNode.
+servers:
+  - url: https://tiny.t-pen.org
+paths:
+  /create:
+    post:
+      summary: Create object
+      operationId: createObject
+      responses:
+        '200':
+          description: Created object
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /query:
+    post:
+      summary: Query objects
+      operationId: queryObjects
+      responses:
+        '200':
+          description: Query results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+  /update:
+    put:
+      summary: Update object
+      operationId: updateObject
+      responses:
+        '200':
+          description: Updated object
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /overwrite:
+    put:
+      summary: Overwrite object
+      operationId: overwriteObject
+      responses:
+        '200':
+          description: Overwritten object
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /delete:
+    delete:
+      summary: Delete object
+      operationId: deleteObject
+      responses:
+        '200':
+          description: Deletion result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true

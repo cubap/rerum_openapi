@@ -1,0 +1,88 @@
+openapi: 3.0.3
+info:
+  title: TPEN-interfaces to TPEN-services Contract
+  version: 0.1.0-alpha.1
+  description: Baseline contract for TPEN-interfaces calls into TPEN-services.
+servers:
+  - url: https://api.t-pen.org
+paths:
+  /project/{id}:
+    get:
+      summary: Read a project
+      operationId: getProject
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project representation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+    put:
+      summary: Update a project
+      operationId: updateProject
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /project/import:
+    post:
+      summary: Import project data
+      operationId: importProject
+      responses:
+        '200':
+          description: Import accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /my/projects:
+    get:
+      summary: List projects for current user
+      operationId: listMyProjects
+      responses:
+        '200':
+          description: Project list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+  /beta/feedback:
+    post:
+      summary: Submit beta feedback
+      operationId: submitFeedback
+      responses:
+        '200':
+          description: Feedback accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true

@@ -1,0 +1,14 @@
+{
+  "name": "rerum_openapi",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Seam-first API contract governance for RERUM ecosystems",
+  "type": "module",
+  "scripts": {
+    "validate:manifests": "node tooling/scripts/validate-manifests.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "js-yaml": "^4.1.0"
+  }
+}

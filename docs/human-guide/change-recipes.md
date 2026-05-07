@@ -6,6 +6,7 @@
 2. Add response and error schemas.
 3. Update seam changelog with feature note.
 4. Run lint and compatibility checks.
+5. If seam coverage changed, update docs/human-guide/interaction-index.md.
 
 ## Deprecate Endpoint
 

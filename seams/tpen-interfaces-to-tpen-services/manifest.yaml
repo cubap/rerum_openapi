@@ -1,20 +1,20 @@
 manifest_version: 1
-seam_id: rerum-to-tinythings
+seam_id: tpen-interfaces-to-tpen-services
 provider_service:
-  name: rerum_server_nodejs
-  repo: CenterForDigitalHumanities/rerum_server_nodejs
+  name: TPEN-services
+  repo: CenterForDigitalHumanities/TPEN-services
 middleware_service:
-  name: TinyNode
-  repo: CenterForDigitalHumanities/TinyNode
+  name: none
+  repo: none
 consumer_service:
-  name: DEER
-  repo: CenterForDigitalHumanities/deer
+  name: TPEN-interfaces
+  repo: CenterForDigitalHumanities/TPEN-interfaces
 openapi_source:
   type: inline
-  location: seams/rerum-to-tinythings/openapi/baseline.openapi.yaml
+  location: seams/tpen-interfaces-to-tpen-services/openapi/baseline.openapi.yaml
 pact_broker_subjects:
-  provider: rerum_server_nodejs
-  consumer: TinyNode
+  provider: TPEN-services
+  consumer: TPEN-interfaces
 verification_gates:
   - openapi-lint
   - openapi-breaking-change

@@ -1,17 +1,17 @@
 manifest_version: 1
-seam_id: rerum-to-tinythings
+seam_id: tinynode-to-rerum
 provider_service:
   name: rerum_server_nodejs
   repo: CenterForDigitalHumanities/rerum_server_nodejs
 middleware_service:
+  name: none
+  repo: none
+consumer_service:
   name: TinyNode
   repo: CenterForDigitalHumanities/TinyNode
-consumer_service:
-  name: DEER
-  repo: CenterForDigitalHumanities/deer
 openapi_source:
   type: inline
-  location: seams/rerum-to-tinythings/openapi/baseline.openapi.yaml
+  location: seams/tinynode-to-rerum/openapi/baseline.openapi.yaml
 pact_broker_subjects:
   provider: rerum_server_nodejs
   consumer: TinyNode

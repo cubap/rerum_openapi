@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: TinyPen to RERUM Contract
+  version: 0.1.0-alpha.1
+  description: Baseline contract for TinyPen proxy calls into RERUM.
+externalDocs:
+  description: TinyPen routes source
+  url: https://github.com/CenterForDigitalHumanities/TinyPen/tree/main/routes
+servers:
+  - url: https://store.rerum.io/v1
+paths:
+  /client/request-new-access-token:
+    post:
+      summary: Request refreshed access token
+      operationId: requestNewAccessToken
+      responses:
+        '200':
+          description: Token response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /api/create:
+    post:
+      summary: Create object
+      operationId: createObject
+      responses:
+        '200':
+          description: Created object
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /api/update:
+    put:
+      summary: Update object
+      operationId: updateObject
+      responses:
+        '200':
+          description: Updated object
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /api/overwrite:
+    put:
+      summary: Overwrite object
+      operationId: overwriteObject
+      responses:
+        '200':
+          description: Overwritten object
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /api/query:
+    post:
+      summary: Query objects
+      operationId: queryObjects
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: skip
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Query results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+  /api/delete/{id}:
+    delete:
+      summary: Delete object by id
+      operationId: deleteObject
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deletion result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true

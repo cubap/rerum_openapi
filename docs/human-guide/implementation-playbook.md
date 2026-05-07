@@ -13,12 +13,19 @@ Upstream API changes can break downstream applications silently. This repository
 
 ## Quick Start (First 60 Minutes)
 
-1. Pick one seam (start with RERUM -> TinyThings).
-2. Fill in seam metadata in seams/rerum-to-tinythings/manifest.yaml.
-3. Confirm canonical OpenAPI source location and add it to manifest.
+1. Pick one seam from docs/human-guide/interaction-index.md.
+2. Update seam metadata in seams/<seam-id>/manifest.yaml.
+3. Confirm canonical OpenAPI source location and update seams/<seam-id>/openapi/baseline.openapi.yaml.
 4. Define stable CI test endpoints (health/readiness/spec).
 5. Agree on owners and deprecation notice policy.
-6. Run schema validation for the manifest.
+6. Decide gate enforcement mode by environment (dev advisory, stage/prod blocking).
+7. Run schema validation for all manifests using npm run validate:manifests.
+
+## Current Reality Snapshot
+
+- The repository currently tracks 11 active seam manifests.
+- Shared TinyNode component schemas are centralized in schemas/openapi/tinynode-shared-components.openapi.yaml.
+- Multiple seams now reference shared OpenAPI components instead of duplicating schema blocks.
 
 ## Daily Workflow
 
@@ -47,4 +54,4 @@ Upstream API changes can break downstream applications silently. This repository
 
 1. Advisory mode in dev first.
 2. Blocking mode in stage/prod after pilot stability.
-3. Scale to next seams using templates after pilot signoff.
+3. Scale to additional seams using templates after pilot signoff.

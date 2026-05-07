@@ -1,5 +1,15 @@
 # Troubleshooting
 
+## Manifest schema validation failures
+
+Symptoms:
+- npm run validate:manifests fails
+
+Checks:
+1. Confirm required manifest fields are present (including environment_gate_mode and middleware_service).
+2. Confirm seam OpenAPI location exists and path is correct.
+3. Re-run npm run validate:manifests after correcting YAML shape/indentation.
+
 ## OpenAPI lint failures
 
 Symptoms:
