@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/seam-manifest.schema.json",
+  "title": "Seam Manifest",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "seam_id",
+    "provider_service",
+    "middleware_service",
+    "consumer_service",
+    "openapi_source",
+    "pact_broker_subjects",
+    "verification_gates",
+    "environments",
+    "versioning_policy",
+    "owners",
+    "deprecation_policy",
+    "test_endpoint_contract"
+  ],
+  "properties": {
+    "manifest_version": { "type": "integer", "minimum": 1 },
+    "seam_id": { "type": "string", "minLength": 3 },
+    "provider_service": {
+      "type": "object",
+      "required": ["name", "repo"],
+      "properties": {
+        "name": { "type": "string" },
+        "repo": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "middleware_service": {
+      "type": "object",
+      "required": ["name", "repo"],
+      "properties": {
+        "name": { "type": "string" },
+        "repo": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "consumer_service": {
+      "type": "object",
+      "required": ["name", "repo"],
+      "properties": {
+        "name": { "type": "string" },
+        "repo": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "openapi_source": {
+      "type": "object",
+      "required": ["type", "location"],
+      "properties": {
+        "type": { "type": "string", "enum": ["inline", "external-repo", "url"] },
+        "location": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "pact_broker_subjects": {
+      "type": "object",
+      "required": ["provider", "consumer"],
+      "properties": {
+        "provider": { "type": "string" },
+        "consumer": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "verification_gates": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "environments": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "versioning_policy": {
+      "type": "object",
+      "required": ["channel_tags", "compatibility_rule"],
+      "properties": {
+        "channel_tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "compatibility_rule": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "owners": {
+      "type": "object",
+      "required": ["contract_owner", "verifier_owner", "release_approver"],
+      "properties": {
+        "contract_owner": { "type": "string" },
+        "verifier_owner": { "type": "string" },
+        "release_approver": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "deprecation_policy": {
+      "type": "object",
+      "required": ["min_notice_days", "require_migration_notes"],
+      "properties": {
+        "min_notice_days": { "type": "integer", "minimum": 0 },
+        "require_migration_notes": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "test_endpoint_contract": {
+      "type": "object",
+      "required": ["health_endpoint", "readiness_endpoint", "spec_endpoint", "fixture_strategy"],
+      "properties": {
+        "health_endpoint": { "type": "string" },
+        "readiness_endpoint": { "type": "string" },
+        "spec_endpoint": { "type": "string" },
+        "fixture_strategy": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

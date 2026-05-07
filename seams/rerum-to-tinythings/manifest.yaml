@@ -1,0 +1,42 @@
+manifest_version: 1
+seam_id: rerum-to-tinythings
+provider_service:
+  name: rerum_server_nodejs
+  repo: CenterForDigitalHumanities/rerum_server_nodejs
+middleware_service:
+  name: TinyThings
+  repo: CenterForDigitalHumanities/TinyThings
+consumer_service:
+  name: TinyNode
+  repo: CenterForDigitalHumanities/TinyNode
+openapi_source:
+  type: external-repo
+  location: "<set canonical source path or URL>"
+pact_broker_subjects:
+  provider: rerum_server_nodejs
+  consumer: TinyThings
+verification_gates:
+  - openapi-lint
+  - openapi-breaking-change
+  - pact-provider-verification
+environments:
+  - dev
+  - stage
+  - prod
+versioning_policy:
+  channel_tags:
+    - alpha
+    - stable
+  compatibility_rule: additive-only-until-approved-breaking-change
+owners:
+  contract_owner: "<team or person>"
+  verifier_owner: "<team or person>"
+  release_approver: "<team or person>"
+deprecation_policy:
+  min_notice_days: 30
+  require_migration_notes: true
+test_endpoint_contract:
+  health_endpoint: "<endpoint>"
+  readiness_endpoint: "<endpoint>"
+  spec_endpoint: "<endpoint>"
+  fixture_strategy: deterministic-seeded-data

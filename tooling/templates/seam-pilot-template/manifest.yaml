@@ -1,0 +1,42 @@
+manifest_version: 1
+seam_id: <provider>-to-<consumer-or-middleware>
+provider_service:
+  name: <provider service name>
+  repo: <org/repo>
+middleware_service:
+  name: <middleware service name or none>
+  repo: <org/repo or none>
+consumer_service:
+  name: <consumer service name>
+  repo: <org/repo>
+openapi_source:
+  type: external-repo
+  location: "<source path or url>"
+pact_broker_subjects:
+  provider: <provider>
+  consumer: <consumer>
+verification_gates:
+  - openapi-lint
+  - openapi-breaking-change
+  - pact-provider-verification
+environments:
+  - dev
+  - stage
+  - prod
+versioning_policy:
+  channel_tags:
+    - alpha
+    - stable
+  compatibility_rule: additive-only-until-approved-breaking-change
+owners:
+  contract_owner: "<team or person>"
+  verifier_owner: "<team or person>"
+  release_approver: "<team or person>"
+deprecation_policy:
+  min_notice_days: 30
+  require_migration_notes: true
+test_endpoint_contract:
+  health_endpoint: "<endpoint>"
+  readiness_endpoint: "<endpoint>"
+  spec_endpoint: "<endpoint>"
+  fixture_strategy: deterministic-seeded-data
