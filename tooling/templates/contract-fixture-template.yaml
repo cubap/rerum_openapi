@@ -1,0 +1,22 @@
+interactions:
+  - path: /app/create
+    method: post
+    expectedStatus: '200'
+    request:
+      '@type': ExampleThing
+      label: Example object
+    response:
+      status: '200'
+      body:
+        '@id': https://example.org/object/123
+        label: Example object
+  - path: /app/query
+    method: get
+    expectedStatus: '200'
+    response:
+      status: '200'
+      body:
+        results:
+          - '@id': https://example.org/object/123
+            label: Example object
+        total: 1

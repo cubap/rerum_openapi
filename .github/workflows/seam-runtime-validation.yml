@@ -1,0 +1,70 @@
+name: Seam Runtime Validation
+
+on:
+  workflow_call:
+    inputs:
+      contract_repo_ref:
+        required: false
+        type: string
+        default: main
+      seam_manifest_path:
+        required: true
+        type: string
+      target_base_url:
+        required: true
+        type: string
+      compare_paths:
+        required: false
+        type: boolean
+        default: true
+      compare_operations:
+        required: false
+        type: boolean
+        default: true
+      fixture_file:
+        required: false
+        type: string
+        default: ''
+      timeout_ms:
+        required: false
+        type: number
+        default: 10000
+
+jobs:
+  validate-runtime:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout caller repo
+        uses: actions/checkout@v4
+        with:
+          path: target-repo
+
+      - name: Checkout contract repo
+        uses: actions/checkout@v4
+        with:
+          repository: cubap/rerum_openapi
+          ref: ${{ inputs.contract_repo_ref }}
+          path: contract-repo
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: contract-repo/package-lock.json
+
+      - name: Install contract repo dependencies
+        working-directory: contract-repo
+        run: npm ci
+
+      - name: Validate seam runtime endpoints
+        working-directory: contract-repo
+        run: >
+          node tooling/scripts/validate-seam-runtime.js
+          --manifest "${{ inputs.seam_manifest_path }}"
+          --base-url "${{ inputs.target_base_url }}"
+          --compare-paths "${{ inputs.compare_paths }}"
+          --compare-operations "${{ inputs.compare_operations }}"
+          --fixture-file "${{ inputs.fixture_file && format('../target-repo/{0}', inputs.fixture_file) || '' }}"
+          --timeout-ms "${{ inputs.timeout_ms }}"

@@ -6,6 +6,7 @@ Welcome to the seam-governance documentation for this repository.
 
 - [Implementation Playbook](human-guide/implementation-playbook.md)
 - [Interaction Index](human-guide/interaction-index.md)
+- [Testing Harness Integration](human-guide/testing-harness-integration.md)
 - [Change Recipes](human-guide/change-recipes.md)
 - [Troubleshooting](human-guide/troubleshooting.md)
 

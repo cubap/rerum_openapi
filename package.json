@@ -5,7 +5,8 @@
   "description": "Seam-first API contract governance for RERUM ecosystems",
   "type": "module",
   "scripts": {
-    "validate:manifests": "node tooling/scripts/validate-manifests.mjs"
+    "validate:manifests": "node tooling/scripts/validate-manifests.js",
+    "validate:runtime": "node tooling/scripts/validate-seam-runtime.js"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

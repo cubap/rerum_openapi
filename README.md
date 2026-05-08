@@ -14,6 +14,7 @@ Human-facing seam map:
 Contract model:
 - OpenAPI is canonical for interface design and change policy.
 - Pact metadata is tracked for runtime compatibility status.
+- Reusable GitHub Actions workflows in this repo can be called by downstream CI harnesses.
 
 ## Repository Layout
 
