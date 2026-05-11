@@ -554,13 +554,12 @@ async function main() {
     console.log('Manifest does not define test_endpoint_contract. Runtime endpoint probes skipped.')
   }
 
-  if (!localOpenapi) {
-    console.log('Manifest does not define openapi_source.location. Baseline comparisons skipped.')
-    process.exit(0)
-  }
-
-  if (!specResult) {
-    console.log('Spec endpoint data is unavailable because test_endpoint_contract is missing or does not define spec_endpoint. Baseline comparisons skipped.')
+  if (!localOpenapi || !specResult) {
+    if (!localOpenapi) {
+      console.log('Manifest does not define openapi_source.location. Baseline comparisons skipped.')
+    } else {
+      console.log('Spec endpoint data is unavailable because test_endpoint_contract is missing or does not define spec_endpoint. Baseline comparisons skipped.')
+    }
     process.exit(0)
   }
 
