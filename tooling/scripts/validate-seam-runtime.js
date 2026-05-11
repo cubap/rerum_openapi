@@ -513,6 +513,7 @@ async function main() {
   }
 
   const testEndpoints = manifest?.test_endpoint_contract
+  const hasTestEndpointContract = Boolean(testEndpoints)
   if (!testEndpoints) {
     console.log('Manifest does not define test_endpoint_contract. Runtime endpoint probes skipped.')
   }
@@ -525,7 +526,7 @@ async function main() {
       process.exit(1)
     }
     console.log(`Health endpoint passed: ${healthUrl}`)
-  } else {
+  } else if (hasTestEndpointContract) {
     console.log('Health endpoint probe skipped: test_endpoint_contract.health_endpoint is not defined.')
   }
 
@@ -537,7 +538,7 @@ async function main() {
       process.exit(1)
     }
     console.log(`Readiness endpoint passed: ${readinessUrl}`)
-  } else {
+  } else if (hasTestEndpointContract) {
     console.log('Readiness endpoint probe skipped: test_endpoint_contract.readiness_endpoint is not defined.')
   }
 
@@ -550,7 +551,7 @@ async function main() {
       process.exit(1)
     }
     console.log(`Spec endpoint passed: ${specUrl}`)
-  } else {
+  } else if (hasTestEndpointContract) {
     console.log('Spec endpoint probe skipped: test_endpoint_contract.spec_endpoint is not defined.')
   }
 
@@ -560,7 +561,7 @@ async function main() {
   }
 
   if (!specResult) {
-    console.log('Spec endpoint is not configured. Baseline comparisons skipped.')
+    console.log('Spec endpoint data is unavailable because test_endpoint_contract.spec_endpoint is not configured. Baseline comparisons skipped.')
     process.exit(0)
   }
 
