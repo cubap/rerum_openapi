@@ -513,45 +513,45 @@ async function main() {
   }
 
   const testEndpoints = manifest?.test_endpoint_contract
-  if (!testEndpoints) {
-    console.log('Manifest does not define test_endpoint_contract. Runtime endpoint probes skipped.')
-  }
-
-  if (testEndpoints?.health_endpoint) {
-    const healthUrl = buildUrl(args.baseUrl, testEndpoints.health_endpoint)
-    const healthResult = await fetchJsonish(healthUrl, args.timeoutMs)
-    if (!healthResult.ok) {
-      console.error(`Health endpoint failed: ${healthUrl} (${healthResult.status})`)
-      process.exit(1)
-    }
-    console.log(`Health endpoint passed: ${healthUrl}`)
-  } else if (testEndpoints) {
-    console.log('Health endpoint probe skipped: test_endpoint_contract does not define health_endpoint.')
-  }
-
-  if (testEndpoints?.readiness_endpoint) {
-    const readinessUrl = buildUrl(args.baseUrl, testEndpoints.readiness_endpoint)
-    const readinessResult = await fetchJsonish(readinessUrl, args.timeoutMs)
-    if (!readinessResult.ok) {
-      console.error(`Readiness endpoint failed: ${readinessUrl} (${readinessResult.status})`)
-      process.exit(1)
-    }
-    console.log(`Readiness endpoint passed: ${readinessUrl}`)
-  } else if (testEndpoints) {
-    console.log('Readiness endpoint probe skipped: test_endpoint_contract does not define readiness_endpoint.')
-  }
-
   let specResult = null
-  if (testEndpoints?.spec_endpoint) {
-    const specUrl = buildUrl(args.baseUrl, testEndpoints.spec_endpoint)
-    specResult = await fetchJsonish(specUrl, args.timeoutMs)
-    if (!specResult.ok) {
-      console.error(`Spec endpoint failed: ${specUrl} (${specResult.status})`)
-      process.exit(1)
+  if (testEndpoints) {
+    if (testEndpoints.health_endpoint) {
+      const healthUrl = buildUrl(args.baseUrl, testEndpoints.health_endpoint)
+      const healthResult = await fetchJsonish(healthUrl, args.timeoutMs)
+      if (!healthResult.ok) {
+        console.error(`Health endpoint failed: ${healthUrl} (${healthResult.status})`)
+        process.exit(1)
+      }
+      console.log(`Health endpoint passed: ${healthUrl}`)
+    } else {
+      console.log('Health endpoint probe skipped: test_endpoint_contract does not define health_endpoint.')
     }
-    console.log(`Spec endpoint passed: ${specUrl}`)
-  } else if (testEndpoints) {
-    console.log('Spec endpoint probe skipped: test_endpoint_contract does not define spec_endpoint.')
+
+    if (testEndpoints.readiness_endpoint) {
+      const readinessUrl = buildUrl(args.baseUrl, testEndpoints.readiness_endpoint)
+      const readinessResult = await fetchJsonish(readinessUrl, args.timeoutMs)
+      if (!readinessResult.ok) {
+        console.error(`Readiness endpoint failed: ${readinessUrl} (${readinessResult.status})`)
+        process.exit(1)
+      }
+      console.log(`Readiness endpoint passed: ${readinessUrl}`)
+    } else {
+      console.log('Readiness endpoint probe skipped: test_endpoint_contract does not define readiness_endpoint.')
+    }
+
+    if (testEndpoints.spec_endpoint) {
+      const specUrl = buildUrl(args.baseUrl, testEndpoints.spec_endpoint)
+      specResult = await fetchJsonish(specUrl, args.timeoutMs)
+      if (!specResult.ok) {
+        console.error(`Spec endpoint failed: ${specUrl} (${specResult.status})`)
+        process.exit(1)
+      }
+      console.log(`Spec endpoint passed: ${specUrl}`)
+    } else {
+      console.log('Spec endpoint probe skipped: test_endpoint_contract does not define spec_endpoint.')
+    }
+  } else {
+    console.log('Manifest does not define test_endpoint_contract. Runtime endpoint probes skipped.')
   }
 
   if (!localOpenapi) {
@@ -560,7 +560,7 @@ async function main() {
   }
 
   if (!specResult) {
-    console.log('Spec endpoint data is unavailable because test_endpoint_contract.spec_endpoint is not configured. Baseline comparisons skipped.')
+    console.log('Spec endpoint data is unavailable because test_endpoint_contract is missing or does not define spec_endpoint. Baseline comparisons skipped.')
     process.exit(0)
   }
 
