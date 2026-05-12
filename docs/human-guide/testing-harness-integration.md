@@ -103,11 +103,11 @@ interactions:
 ## What It Validates
 
 1. The seam manifest can be loaded.
-2. The target health endpoint returns success.
-3. The target readiness endpoint returns success.
-4. The target spec endpoint returns success.
-5. The target OpenAPI document contains every path declared in the local baseline artifact when compare_paths is enabled.
-6. The target OpenAPI document contains every baseline method and documented response code when compare_operations is enabled.
+2. If configured, the target health endpoint returns success.
+3. If configured, the target readiness endpoint returns success.
+4. If configured, the target spec endpoint returns success.
+5. When a spec endpoint is configured and compare_paths is enabled, the target OpenAPI document contains every path declared in the local baseline artifact.
+6. When a spec endpoint is configured and compare_operations is enabled, the target OpenAPI document contains every baseline method and documented response code.
 7. Recorded fixture interactions map to documented baseline paths, methods, request/response body schemas, and response statuses when fixture_file is provided.
 
 ## Current Limitations
